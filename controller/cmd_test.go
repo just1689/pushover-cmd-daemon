@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// TestCMD checks that we can echo 1 and read the result
 func TestCMD(t *testing.T) {
 	out, err := CMD("echo", []string{"1"})
 	if err != nil {

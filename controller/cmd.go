@@ -5,6 +5,7 @@ import (
 	"os/exec"
 )
 
+// CMD runs a linux command and returns the full output
 func CMD(cmd string, args []string) (out string, err error) {
 	logrus.Infoln("> Starting CMD")
 	var b []byte
