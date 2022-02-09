@@ -41,6 +41,7 @@ func NotifyPushover(recipient *pushover.Recipient, message *pushover.Message) er
 		logrus.Errorln(err)
 		return err
 	}
-	logrus.Infoln(">> OK\n")
+	logrus.Infoln(">> OK")
+	logrus.Infoln("")
 	return nil
 }

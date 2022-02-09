@@ -10,15 +10,20 @@ import (
 
 func main() {
 	setupLogger()
-	logrus.Infoln("\n\n~~~ Starting Pushover CMD Daemon ~~~\n\n")
+	logrus.Infoln("")
+	logrus.Infoln("~~~ Starting Pushover CMD Daemon ~~~")
+	logrus.Infoln("")
 
 	c := loadConfig()
 	controller.PushoverClient = controller.NewPushOverClient(c.PushoverToken)
 	controller.Setup(c)
 
-	logrus.Infoln("> Listening for SIGTERM\n\n")
+	logrus.Infoln("> Listening for SIGTERM")
+	logrus.Infoln("")
 	sigChan := make(chan os.Signal)
-	fmt.Println("\nShutting down\n", <-sigChan)
+	logrus.Infoln("")
+	fmt.Println("Shutting down", <-sigChan)
+	logrus.Infoln("")
 
 }
 

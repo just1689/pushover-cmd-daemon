@@ -18,6 +18,7 @@ func EvalFunction(in string, errorWords []string) (healthy bool, err error) {
 		}).Infoln("next ew")
 	}
 	logrus.WithField(
-		"healthy", healthy).Infoln(">> OK\n")
+		"healthy", healthy).Infoln(">> OK")
+	logrus.Infoln("")
 	return
 }

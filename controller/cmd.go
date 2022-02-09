@@ -16,6 +16,7 @@ func CMD(cmd string, args []string) (out string, err error) {
 		return
 	}
 	out = string(b)
-	logrus.Infoln(">> OK\n")
+	logrus.Infoln(">> OK")
+	logrus.Infoln("")
 	return
 }

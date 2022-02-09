@@ -19,8 +19,10 @@ func Setup(c *model.Config) {
 			return
 		}
 		logrus.Infoln(">> OK")
-		logrus.Infoln("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
+		logrus.Infoln("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+		logrus.Infoln("")
 	})
-	logrus.Infoln(">> OK\n")
+	logrus.Infoln(">> OK")
+	logrus.Infoln("")
 
 }
