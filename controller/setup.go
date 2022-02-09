@@ -10,8 +10,13 @@ func Setup(c *model.Config) {
 	InitiateCron(c.Cron, func() {
 		logrus.Infoln("> cron function run")
 		healthy, err := Check(c)
-		if err != nil || !healthy {
+		if err != nil {
+			NotifyPushoverFromSystemError(c, err.Error())
+			return
+		}
+		if !healthy {
 			NotifyPushoverFromConfig(c)
+			return
 		}
 		logrus.Infoln(">> OK")
 		logrus.Infoln("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
