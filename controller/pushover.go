@@ -6,13 +6,38 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+var (
+	// PushoverClient communicates with the Pushover API
+	PushoverClient *pushover.Pushover
+)
+
+func NewPushOverClient(token string) *pushover.Pushover {
+	logrus.Infoln("> NewPushOverClient")
+	return pushover.New(token)
+}
+
+func GeneratePushover(recipientID string, title, body string, priority int) (*pushover.Recipient, *pushover.Message) {
+	logrus.Infoln("> GeneratePushover")
+	recipient := pushover.NewRecipient(recipientID)
+	message := pushover.NewMessageWithTitle(body, title)
+	message.Priority = priority
+	return recipient, message
+}
+
 func NotifyPushoverFromConfig(c *model.Config) error {
 	logrus.Infoln("> NotifyPushoverFromConfig")
-	app := pushover.New(c.PushoverToken)
-	recipient := pushover.NewRecipient(c.PushoverRecipient)
-	message := pushover.NewMessageWithTitle(c.MsgBody, c.MsgTitle)
-	message.Priority = c.MsgPriority
-	if _, err := app.SendMessage(message, recipient); err != nil {
+	recipient, message := GeneratePushover(c.PushoverRecipient, c.MsgTitle, c.MsgBody, c.MsgPriority)
+	return NotifyPushover(recipient, message)
+}
+func NotifyPushoverFromSystemError(c *model.Config, errStr string) error {
+	logrus.Infoln("> NotifyPushoverFromSystemError")
+	recipient, message := GeneratePushover(c.PushoverRecipient, "Faulty - "+c.MsgTitle, errStr, c.MsgPriority)
+	return NotifyPushover(recipient, message)
+}
+
+func NotifyPushover(recipient *pushover.Recipient, message *pushover.Message) error {
+	logrus.Infoln("> NotifyPushover")
+	if _, err := PushoverClient.SendMessage(message, recipient); err != nil {
 		logrus.Errorln(err)
 		return err
 	}
