@@ -21,6 +21,7 @@ func Load() (*model.Config, error) {
 	return LoadFromFile(getConfigName())
 }
 
+// LoadFromFile attempts to read and unmarshal the config
 func LoadFromFile(f string) (*model.Config, error) {
 	c := &model.Config{}
 	b, err := ioutil.ReadFile(f)
@@ -28,27 +29,16 @@ func LoadFromFile(f string) (*model.Config, error) {
 		logrus.Errorln("could not load file:", f)
 		return c, errors.New(model.ErrorNoConfig)
 	}
-	err = json.Unmarshal(b, c)
-	if err != nil {
+	if err = json.Unmarshal(b, c); err != nil {
 		logrus.Errorln("could not unmarshal file to config:", f)
 		return c, err
 	}
 	return c, err
 }
 
+// CreateConfig will generate the config.json and write the file
 func CreateConfig() {
-	c := model.Config{
-		Cron:              "@every 1m",
-		CMD:               "print",
-		Args:              []string{"1"},
-		ErrorWords:        []string{"error"},
-		MsgTitle:          "Error",
-		MsgBody:           "Could not find 1 in result",
-		MsgPriority:       0,
-		PushoverToken:     "xxx",
-		PushoverRecipient: "yyy",
-	}
-	b, err := json.Marshal(c)
+	b, err := json.Marshal(model.GetConfigDefaults())
 	if err != nil {
 		logrus.Errorln(err)
 		return
