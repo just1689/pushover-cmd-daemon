@@ -16,4 +16,4 @@ jobs:
         goos: linux
         goarch: amd64
         binary_name: pcd
-        project_path: ./bin/app.go
+        project_path: ./bin/
