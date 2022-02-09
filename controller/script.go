@@ -11,9 +11,6 @@ func EvalFunction(in string, errorWords []string) (healthy bool, err error) {
 	for _, ew := range errorWords {
 		if strings.Contains(in, ew) {
 			healthy = false
-		} else {
-			//Dont override...
-			//healthy = true
 		}
 		logrus.WithFields(logrus.Fields{
 			"errorWord": ew,
