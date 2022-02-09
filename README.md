@@ -1,5 +1,6 @@
 # pushover-cmd-daemon
 
+![Main status](https://github.com/just1689/pushover-cmd-daemon/actions/workflows/go.yml/badge.svg)
 <a href="https://goreportcard.com/report/github.com/just1689/pushover-cmd-daemon"><img src="https://goreportcard.com/badge/github.com/just1689/pushover-cmd-daemon"></a>
 <a href="https://codebeat.co/projects/github-com-just1689-pushover-cmd-daemon-main"><img alt="codebeat badge" src="https://codebeat.co/badges/8dcd25bc-51d4-4624-9697-aa17fc58ce3b" /></a>
 <a href="https://codeclimate.com/github/just1689/pushover-cmd-daemon/maintainability"><img src="https://api.codeclimate.com/v1/badges/0463e4ecba35fc60b3d7/maintainability" /></a>
