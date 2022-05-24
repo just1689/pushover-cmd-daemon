@@ -5,6 +5,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+var CurrentHealthStatus = true
+
 func Setup(c *model.Config) {
 	logrus.Infoln("> Setting up cronjob", c.Cron)
 	InitiateCron(c.Cron, func() {
@@ -16,8 +18,10 @@ func Setup(c *model.Config) {
 		}
 		if !healthy {
 			NotifyPushoverFromConfig(c)
+			CurrentHealthStatus = false
 			return
 		}
+		CurrentHealthStatus = true
 		logrus.Infoln(">> OK")
 		logrus.Infoln("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 		logrus.Infoln("")

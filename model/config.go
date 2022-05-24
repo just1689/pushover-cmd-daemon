@@ -2,6 +2,7 @@ package model
 
 // Config describes the options for running the system
 type Config struct {
+	Listen            string   `json:"listen"`
 	Cron              string   `json:"cron"`
 	CMD               string   `json:"cmd"`
 	Args              []string `json:"args"`
@@ -16,6 +17,7 @@ type Config struct {
 // GetConfigDefaults is a hardcoded set of defaults for generating the config.json
 func GetConfigDefaults() Config {
 	return Config{
+		Listen:            ":8080",
 		Cron:              "@every 1m",
 		CMD:               "print",
 		Args:              []string{"1"},
